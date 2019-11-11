@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-exercise
+spec:
+  containers:
+  - name: init-exercise
+    image: nginx
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - name: workdir
+        mountPath: /usr/share/nginx/html
+  initContainers:
+    - name: download-from-git
+      image: ubuntu
+      command: ["/bin/sh", "-c"]
+      args: ["apt-get update && apt-get install -y git && git clone https://github.com/PoznajKubernetes/poznajkubernetes.github.io /work-dir"]
+      volumeMounts:
+        - name: workdir
+          mountPath: /work-dir
+  volumes:
+    - name: workdir
+      emptyDir: {}
