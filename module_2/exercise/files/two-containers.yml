@@ -3,7 +3,6 @@ kind: Pod
 metadata:
  name: two-containers
 spec:
-  restartPolicy: OnFailure
   containers:
   - image: poznajkubernetes/helloapp:multi
     name: helloapp

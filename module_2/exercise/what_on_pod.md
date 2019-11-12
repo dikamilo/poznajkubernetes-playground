@@ -313,7 +313,7 @@ var pageContext = {"urlBase":"","hostname":"kuard","addrs":["10.1.0.57"],"versio
 apiVersion: v1
 kind: Pod
 metadata:
- name: helloapp
+ name: two-containers
 spec:
  containers:
  - image: poznajkubernetes/helloapp:multi
