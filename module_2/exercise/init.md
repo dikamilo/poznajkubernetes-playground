@@ -5,6 +5,16 @@ Celem ćwiczenia jest pobranie strony www z repozytorium git za pomocą kontener
 Do kontenera init z git zbuduj obraz na bazie ubuntu. Należy doinstalować `git`.
 Do kontenera serwującego treść wykorzystaj `nginx`.
 
+```Dockerfile
+FROM ubuntu
+
+RUN apt-get update && apt-get install -y git
+```
+
+```
+docker build -t dikamilo/download-from-git -f Dockerfile.download-from-git .
+```
+
 ```yml
 apiVersion: v1
 kind: Pod
@@ -21,9 +31,13 @@ spec:
         mountPath: /usr/share/nginx/html
   initContainers:
     - name: download-from-git
-      image: ubuntu
-      command: ["/bin/sh", "-c"]
-      args: ["apt-get update && apt-get install -y git && git clone https://github.com/PoznajKubernetes/poznajkubernetes.github.io /work-dir"]
+      image: dikamilo/download-from-git
+      imagePullPolicy: IfNotPresent
+      command:
+        - git
+        - clone
+        - "https://github.com/PoznajKubernetes/poznajkubernetes.github.io"
+        - /work-dir
       volumeMounts:
         - name: workdir
           mountPath: /work-dir

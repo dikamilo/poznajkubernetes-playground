@@ -13,9 +13,13 @@ spec:
         mountPath: /usr/share/nginx/html
   initContainers:
     - name: download-from-git
-      image: ubuntu
-      command: ["/bin/sh", "-c"]
-      args: ["apt-get update && apt-get install -y git && git clone https://github.com/PoznajKubernetes/poznajkubernetes.github.io /work-dir"]
+      image: dikamilo/download-from-git
+      imagePullPolicy: IfNotPresent
+      command:
+        - git
+        - clone
+        - "https://github.com/PoznajKubernetes/poznajkubernetes.github.io"
+        - /work-dir
       volumeMounts:
         - name: workdir
           mountPath: /work-dir
