@@ -13,7 +13,7 @@ spec:
         mountPath: /usr/share/nginx/html
   initContainers:
     - name: download-from-git
-      image: dikamilo/download-from-git
+      image: docker.pkg.github.com/dikamilo/poznajkubernetes-playground/exercise:init-container
       imagePullPolicy: IfNotPresent
       command:
         - git
