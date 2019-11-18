@@ -12,7 +12,9 @@ RUN apt-get update && apt-get install -y git
 ```
 
 ```
-docker build -t dikamilo/download-from-git -f Dockerfile.download-from-git .
+docker login docker.pkg.github.com --username my_login -p my_token
+docker build -t docker.pkg.github.com/dikamilo/poznajkubernetes-playground/exercise:init-container -f Dockerfile.download-from-git .
+docker push docker.pkg.github.com/dikamilo/poznajkubernetes-playground/exercise:init-container
 ```
 
 ```yml
@@ -31,7 +33,7 @@ spec:
         mountPath: /usr/share/nginx/html
   initContainers:
     - name: download-from-git
-      image: dikamilo/download-from-git
+      image: docker.pkg.github.com/dikamilo/poznajkubernetes-playground/exercise:init-container
       imagePullPolicy: IfNotPresent
       command:
         - git
