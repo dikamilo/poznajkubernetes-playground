@@ -34,7 +34,7 @@ Pod zakończył swoją pracę.
 
 1. Korzystając ze stanu klastra z ćwiczenia 1 oraz pliku YAML, przystąp do ćwiczenia.
 
-2. Popraw plik YAML dodając `command` tak by Pod nie kończył od razu swojej pracy. Np: dodaj lub zmień tag w obrazie. Poprawne tag dla busybox znajdziesz na stronie: https://hub.docker.com/_/busybox
+2. Popraw plik YAML dodając `command` tak by Pod nie kończył od razu swojej pracy. Np: dodaj lub zmień tag w obrazie. Poprawne tag dla busybox znajdziesz na stronie: https://hub.docker.com/_/busybox.
 
 ```yml
 apiVersion: v1
@@ -57,7 +57,7 @@ spec:
 status: {}
 ```
 
-3. Użyj polecenia kubectl create by wgrać nową definicję.
+3. Użyj polecenia `kubectl create`, by wgrać nową definicję.
 
 ```
 kubectl create -f pod.yml
@@ -67,7 +67,7 @@ kubectl create -f pod.yml
 Error from server (AlreadyExists): error when creating "ex2.yml": pods "busybox" already exists
 ```
 
-4. Zastanów się dlaczego nie działa.
+4. Zastanów się, dlaczego nie działa.
 
 Pod z taką samą nazwą już istnieje, natomiast został utworzony bez zapisanej konfiguracji i K8s nie wie co się zmieniło w definicji Pod'a.
 
@@ -108,7 +108,7 @@ status: {}
 kubectl create -f pod.yml --save-config=true
 ```
 
-3. Wykonaj modyfikację pliku np: zmień czas dla komendy `sleep`
+3. Wykonaj modyfikację pliku np.: zmień czas dla komendy `sleep`.
 
 ```yml
 apiVersion: v1
@@ -141,11 +141,11 @@ kubectl apply -f pod.yml
 The Pod "busybox" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`, `spec.initContainers[*].image`, `spec.activeDeadlineSeconds` or `spec.tolerations` (only additions to existing tolerations)
 ```
 
-5. Zastanów się i opisz na grupie kiedy warto używać `create`, a kiedy `apply`.
+5. Zastanów się i opisz na grupie, kiedy warto używać `create`, a kiedy `apply`.
 
-`apply` pozwala aplikować zmiany do "żyjących" obiektów, specyfikacja nie musi być pełna, ale ma też swoje ograniczenia co do pól które można zmieniać.
+`apply` pozwala aplikować zmiany do „żyjących” obiektów, specyfikacja nie musi być pełna, ale ma też swoje ograniczenia co do pól, które można zmieniać.
 
-`create` nie pozwoli na utworzenie obiektu gdy ten już istnieje.
+`create` nie pozwoli na utworzenie obiektu, gdy ten już istnieje.
 
 Można użyć `kubectl replace -f pod.yml --force` aby usunąć istniejący Pod i zastąpić go nowym.
 

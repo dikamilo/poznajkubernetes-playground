@@ -1,6 +1,6 @@
 # Ćwiczenie 1
 
-1. Stwórz Pod na bazie obrazu z modułu 1
+1. Stwórz Pod na bazie obrazu z modułu 1.
 
 ```yml
 apiVersion: v1
@@ -17,7 +17,7 @@ spec:
 kubectl create -f kuard.yml
 ```
 
-2. Zobacz w jakim stanie on się znajduje
+2. Zobacz, w jakim stanie on się znajduje.
 
 ```
 kubectl get pod
@@ -28,7 +28,7 @@ NAME       READY   STATUS    RESTARTS   AGE
 kuard   1/1     Running   0          15s
 ```
 
-3. Podejrzyj jego logi
+3. Podejrzyj jego logi.
 
 ```
 kubectl logs kuard
@@ -67,7 +67,7 @@ kubectl logs kuard
 2019/11/12 16:55:58 Serving on HTTP on :8080
 ```
 
-4. Wykonaj w koneterze wylistowanie katalogów
+4. Wykonaj w kontenerze wylistowanie katalogów.
 
 ```
 kubectl exec kuard -- ls -la
@@ -98,7 +98,7 @@ drwxr-xr-x    7 root     root          4096 Aug 20 10:30 usr
 drwxr-xr-x   11 root     root          4096 Aug 20 10:30 var
 ```
 
-5. Odpytaj się http://localhost:PORT w kontenerze
+5. Odpytaj się http://localhost:PORT w kontenerze.
 
 ```
 kubectl exec kuard -- wget -qO- localhost:8080
@@ -145,7 +145,7 @@ var pageContext = {"urlBase":"","hostname":"kuard","addrs":["10.1.0.57"],"versio
 </html>
 ```
 
-6. Zrób to samo z powołanego osobno poda (kubectl run)
+6. Zrób to samo z powołanego osobno poda (`kubectl run`).
 
 ```
 kubectl describe pod kuard
@@ -199,7 +199,7 @@ var pageContext = {"urlBase":"","hostname":"kuard","addrs":["10.1.0.57"],"versio
 pod "bb" deleted
 ```
 
-7. Dostań się do poda za pomocą przekierowania portów
+7. Dostań się do poda za pomocą przekierowania portów.
 
 ```
 kubectl port-forward kuard 8080:8080
@@ -250,7 +250,7 @@ var pageContext = {"urlBase":"","hostname":"kuard","addrs":["10.1.0.57"],"versio
 </html>
 ```
 
-8. Dostań się do poda za pomocą API Server
+8. Dostań się do poda za pomocą API Server.
 
 ```
 kubectl proxy
@@ -307,7 +307,7 @@ var pageContext = {"urlBase":"","hostname":"kuard","addrs":["10.1.0.57"],"versio
 
 # Ćwiczenie 2
 
-1. Stwórz Pod zawierający dwa kontenery – busybox i poznajkubernetes/helloapp:multi
+1. Stwórz Pod zawierający dwa kontenery – `busybox` i `poznajkubernetes/helloapp:multi`.
 
 ```yml
 apiVersion: v1
@@ -326,7 +326,7 @@ spec:
 kubectl create -f two-containers.yml
 ```
 
-2. Zweryfikuj, że Pod działa poprawnie
+2. Zweryfikuj, że Pod działa poprawnie.
 
 ```
 kubectl get pod
@@ -337,7 +337,7 @@ NAME             READY   STATUS             RESTARTS   AGE
 two-containers   1/2     CrashLoopBackOff   1          20s
 ```
 
-3. Jak nie działa, dowiedz się dlaczego
+3. Jak nie działa, dowiedz się dlaczego.
 
 ```
 kubectl describe pod two-containers

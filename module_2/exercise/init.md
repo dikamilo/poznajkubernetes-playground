@@ -2,7 +2,7 @@
 
 Celem ćwiczenia jest pobranie strony www z repozytorium git za pomocą kontenera typu init. Pobrane dane muszą trafić na wolumen typu `emptyDir` i zostać wykorzystane do serwowania treści w głównym kontenerze.
 
-Do kontenera init z git zbuduj obraz na bazie ubuntu. Należy doinstalować `git`.
+Do kontenera init. z git zbuduj obraz na bazie ubuntu. Należy doinstalować `git`.
 Do kontenera serwującego treść wykorzystaj `nginx`.
 
 ```Dockerfile

@@ -67,7 +67,7 @@ proxy pass i upstream) oraz celery (kilka niezależnych maszyn).
 
 ### Zbywalność
 Celery może być zrestartowane, tylko jeżeli przetworzy swoje zadania, backend może być restartowany niezależnie, jest 
-zreplikowany na kilku serwerach. Praktycznie każda część aplikacji może być zrestartowana/zatrzymana oraz 
+replikowany na kilku serwerach. Praktycznie każda część aplikacji może być zrestartowana/zatrzymana oraz 
 uruchomiona przez Systemd.
 
 ### Jednolitość środowisk
