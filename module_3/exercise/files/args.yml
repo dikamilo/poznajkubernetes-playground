@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-args
+spec:
+  restartPolicy: Never
+  containers:
+  - name: exercise-args
+    image: busybox
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    command:
+      - echo
+    args: 
+      - "Hello from $(PROJECT_NAME)"
+    env:
+      - name: PROJECT_NAME
+        value: "Poznajkubernetes"
