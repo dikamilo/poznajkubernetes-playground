@@ -1,0 +1,6 @@
+[owner]
+name = "Kamil"
+
+[urls]
+    [urls.k8s]
+    uri = "poznajkubernetes.pl"

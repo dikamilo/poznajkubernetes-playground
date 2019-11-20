@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-pod-third-cm-volume
+spec:
+  volumes:
+    - name: third-cm-volume
+      configMap:
+          name: third-cm
+          items:
+            - key: 40k.txt
+              path: 40k.txt
+            - key: 50k.txt
+              path: 50k.txt
+  containers:
+  - name: exercise-pod-third-cm-volume
+    image: poznajkubernetes/pkad:blue
+    volumeMounts:
+      - mountPath: /config
+        name: third-cm-volume
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"

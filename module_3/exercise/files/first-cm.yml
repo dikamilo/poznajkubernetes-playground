@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  123_TESTING: first_value
+  TESTING: third_value
+  TESTING-123: second_value
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: first-cm

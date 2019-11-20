@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  TESTING: first_value
+  TESTING_2: second_value
+  config.toml: "[owner]\r\nname = \"Kamil\"\r\n\r\n[urls]\r\n    [urls.k8s]\r\n    uri
+    = \"poznajkubernetes.pl\""
+  my_json_config: "{\r\n    \"section\": {\r\n        \"key_one\": \"first value\",\r\n
+    \       \"key_two\": \"second value\"\r\n    }\r\n}"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: second-cm

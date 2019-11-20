@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-pod-files-cm-volume
+spec:
+  volumes:
+    - name: files-cm-volume
+      configMap:
+          name: files-cm
+  containers:
+  - name: exercise-pod-files-cm-volume
+    image: poznajkubernetes/pkad:blue
+    volumeMounts:
+      - mountPath: /config
+        name: files-cm-volume
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"

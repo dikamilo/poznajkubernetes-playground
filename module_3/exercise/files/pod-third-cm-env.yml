@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-pod-third-cm-env
+spec:
+  containers:
+  - name: exercise-pod-third-cm-env
+    image: poznajkubernetes/pkad:blue
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    envFrom:
+      - configMapRef:
+          name: third-cm
