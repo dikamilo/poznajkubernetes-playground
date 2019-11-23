@@ -45,7 +45,7 @@ Konfiguracja pobierania z: `HashiCorp Vault`
 ## Tokeny dostępowe wewnętrznych usług
 Aplikacja posiada tokeny JWT dla wewnętrznych usług które mogą komunikować się przez REST API z aplikacją i np. synchronizować/pobierać dane.
 
-Konfiguracja pobierania z: `HashiCorp Vault`
+Konfiguracja pobierania z: `Secrets`
 
 ## Typowa konfiguracja aplikacji
 Przykładowe konfiguracje:
@@ -56,4 +56,4 @@ Przykładowe konfiguracje:
 - tryb debug
 - konfiguracja email (host, mail, auth, subject)
 
-Konfiguracja pobierania z: `ConfigMap` (autoryzacja do konta mailowego z `HashiCorp Vault`)
+Konfiguracja pobierania z: `ConfigMap` (autoryzacja do konta mailowego z `Secrets`)
