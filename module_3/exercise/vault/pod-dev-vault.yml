@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dev-vault
+spec:
+  containers:
+  - name: dev-vault
+    image: vault
+    command: ['vault','server','-dev','-log-level','debug','-dev-listen-address','0.0.0.0:8200']
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - containerPort: 8200

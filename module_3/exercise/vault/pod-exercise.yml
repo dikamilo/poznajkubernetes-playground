@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: default
+  name: exercise-pod
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-pod-vault-agent
+spec:
+  serviceAccountName: exercise-pod
+  restartPolicy: Never
+  volumes:
+    - name: vault-token
+      emptyDir:
+        medium: Memory
+    - name: config
+      configMap:
+        name: exercise-vault-agent-config
+        items:
+          - key: vault-agent-config.hcl
+            path: vault-agent-config.hcl
+          - key: consul-template-config.hcl
+            path: consul-template-config.hcl
+    - name: shared-data
+      emptyDir: {}
+  initContainers:
+    - name: vault-agent-auth
+      image: vault
+      volumeMounts:
+        - name: config
+          mountPath: /etc/vault
+        - name: vault-token
+          mountPath: /home/vault
+      env:
+        - name: VAULT_ADDR
+          value: http://10.1.0.94:8200
+      args:
+        [
+          "agent",
+          "-config=/etc/vault/vault-agent-config.hcl"
+        ]
+
+  containers:
+    - name: consul-template
+      image: hashicorp/consul-template:alpine
+      imagePullPolicy: Always
+      volumeMounts:
+        - name: vault-token
+          mountPath: /home/vault
+        - name: config
+          mountPath: /etc/consul-template
+        - name: shared-data
+          mountPath: /etc/secrets
+      env:
+        - name: HOME
+          value: /home/vault
+        - name: VAULT_ADDR
+          value: http://10.1.0.94:8200
+      args:
+        [
+          "-config=/etc/consul-template/consul-template-config.hcl"
+        ]
+    - name: exercise-secrets-from-vault
+      image: poznajkubernetes/pkad:blue
+      volumeMounts:
+        - name: shared-data
+          mountPath: /secrets
