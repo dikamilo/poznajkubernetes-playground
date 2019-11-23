@@ -60,7 +60,7 @@ status: {}
 3. Użyj polecenia `kubectl create`, by wgrać nową definicję.
 
 ```
-kubectl create -f pod.yml
+kubectl create -f pod-command.yml
 ```
 
 ```
@@ -105,7 +105,7 @@ status: {}
 2. Wgraj go na klaster używając polecenia `create`.
 
 ```
-kubectl create -f pod.yml --save-config=true
+kubectl create -f pod-no-restart.yml --save-config=true
 ```
 
 3. Wykonaj modyfikację pliku np.: zmień czas dla komendy `sleep`.
