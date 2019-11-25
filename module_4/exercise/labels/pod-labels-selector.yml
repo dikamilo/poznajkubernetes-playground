@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-labels-first-pod
+  labels:
+    app: ui
+    env: test
+spec:
+  containers:
+  - name: exercise-labels-first-pod
+    image: poznajkubernetes/pkad
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-labels-second-pod
+  labels:
+    app: ui
+    env: stg
+spec:
+  containers:
+  - name: exercise-labels-second-pod
+    image: poznajkubernetes/pkad
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-labels-third-pod
+spec:
+  containers:
+  - name: exercise-labels-third-pod
+    image: poznajkubernetes/pkad
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
