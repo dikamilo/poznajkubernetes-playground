@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-pod-to-pod-nginx
+spec:
+  initContainers:
+    - name: setup-default-page
+      image: busybox
+      env:
+        - name: POD_NAME
+          valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+      command: ['sh', '-c', 'echo "Hello from $(POD_NAME)" > /work-dir/index.html']
+      volumeMounts:
+        - name: workdir
+          mountPath: /work-dir
+  containers:
+  - name: exercise-pod-to-pod-nginx
+    image: nginx
+    volumeMounts:
+      - name: workdir
+        mountPath: /usr/share/nginx/html
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+        name: http
+        protocol: TCP
+  volumes:
+    - name: workdir
+      emptyDir: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exercise-pod-to-pod-tools
+spec:
+  containers:
+  - name: exercise-pod-to-pod-tools
+    image: giantswarm/tiny-tools
+    command: ["/bin/sh"]
+    args: ["-c", "sleep 3600"]
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
