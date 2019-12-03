@@ -586,12 +586,12 @@ Cześć, 🚢 =>  exercise-multiple-labels-instance2
 Cześć, 🚢 =>  exercise-multiple-labels-instance1
 ```
 
-Service poprawnie rozdziela ruch między podami z etykietą `app=helloapp` pomimo tego że pody mają przypisany również inną etykietę. W przypadku zmiany selektora na:
+Service poprawnie rozdziela ruch między podami z etykietą `app=helloapp` pomimo tego że pody mają przypisaną również inną etykietę. W przypadku zmiany selektora na:
 
 ```yaml
 selector:
-    app: helloapp
-    instance: one
+  app: helloapp
+  instance: one
 ```
 
 Ruch będzie przekazywany tylko do pierwszej instancji:
