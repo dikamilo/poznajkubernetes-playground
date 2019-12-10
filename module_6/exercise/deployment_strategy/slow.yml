@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slow-deployment
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: slow-deployment
+  template:
+    metadata:
+      labels:
+        app: slow-deployment
+    spec:
+      containers:
+      - name: slow-deployment
+        image: poznajkubernetes/pkad:blue
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: version
+          value: v1
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
