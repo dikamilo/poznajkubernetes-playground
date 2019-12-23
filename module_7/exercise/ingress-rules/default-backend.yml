@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-ingress-default-backend
+spec:
+  selector:
+    matchLabels:
+      app: exercise-ingress-default-backend
+  template:
+    metadata:
+      labels:
+        app: exercise-ingress-default-backend
+    spec:
+      containers:
+      - name: exercise-ingress-default-backend
+        image: poznajkubernetes/pkad:blue
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: exercise-ingress-default-backend-service
+spec:
+  selector:
+    app: exercise-ingress-default-backend
+  ports:
+  - port: 80
+    targetPort: http
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: exercise-ingress-default-backend-ingress
+spec:
+  backend:
+    serviceName: exercise-ingress-default-backend-service
+    servicePort: 80

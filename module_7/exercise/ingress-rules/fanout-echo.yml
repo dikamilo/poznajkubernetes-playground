@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: exercise-fanout-routing-echo-service
+spec:
+  selector:
+    app: exercise-fanout-routing-echo
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-fanout-routing-echo
+spec:
+  selector:
+    matchLabels:
+      app: exercise-fanout-routing-echo
+  template:
+    metadata:
+      labels:
+        app: exercise-fanout-routing-echo
+    spec:
+      containers:
+      - name: exercise-fanout-routing-echo
+        image: gcr.io/google_containers/echoserver:1.4
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: exercise-fanout-pkad-service
+spec:
+  selector:
+    app: exercise-fanout-pkad
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-fanout-pkad
+spec:
+  selector:
+    matchLabels:
+      app: exercise-fanout-pkad
+  template:
+    metadata:
+      labels:
+        app: exercise-fanout-pkad
+    spec:
+      containers:
+      - name: exercise-fanout-pkad
+        image: poznajkubernetes/helloapp:svc
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
