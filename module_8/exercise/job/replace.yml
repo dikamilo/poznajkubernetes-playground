@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: exercise-job-replace
+spec:
+  jobTemplate:
+    metadata:
+      name: exercise-job-replace
+    spec:
+      parallelism: 2
+      template:
+        spec:
+          containers:
+          - image: busybox
+            name: exercise-job-replace
+            resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+            command:
+            - /bin/sh
+            - -c
+            - sleep 3m
+          restartPolicy: Never
+  schedule: "*/2 * * * *"
+  concurrencyPolicy: Replace

@@ -1,0 +1,24 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: exercise-job-schedule
+spec:
+  jobTemplate:
+    metadata:
+      name: exercise-job-schedule
+    spec:
+      template:
+        spec:
+          containers:
+          - image: busybox
+            name: exercise-job-schedule
+            resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+            command:
+            - /bin/sh
+            - -c
+            - echo "job demo"
+          restartPolicy: Never
+  schedule: "*/2 * * * *"
